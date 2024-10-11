@@ -24,6 +24,7 @@ export default function Home() {
   const [isNextLoading,setIsNextLoading] = useState(false)
   const [isSelected,SetIsSelected]=useState(0)
   const [results,setResults]=useState<UnsplashImage[]>([])
+  const[isNull,setIsNull]=useState(false)
 
 
   const onSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
@@ -40,10 +41,13 @@ e.preventDefault();
           }
         }
       )
+      setIsNull(false)
+      if (response.data.results.length == 0) {
+        setIsNull(true)
+      }
       console.log(response.data.results)
       setResults(response.data.results)
       setIsLoading(true)
-
   }
 
   const load=()=>{
@@ -75,10 +79,25 @@ setIsNextLoading={setIsNextLoading}
 <Search search={search} setSearch={setSearch} onSubmit={onSubmit}/>
 {isLoading  ?
 <Loading/>
-:<Gallery results={results} SetIsOpen={setIsOpen} SetIsSelected={SetIsSelected} 
+:
+
+(!isNull ? (<Gallery results={results} SetIsOpen={setIsOpen} SetIsSelected={SetIsSelected} 
 isLoading={isLoading} 
 
-/>}
+/>)
+:
+(<div style={{display:'flex',justifyContent:'Center',marginTop:'50px',width:'100%', height:'90vh'}}>
+  <div>
+    <h1>
+
+  0 Results
+    </h1>
+  </div>
+  </div>
+))
+}
+
+
     </div>
   );
 }
