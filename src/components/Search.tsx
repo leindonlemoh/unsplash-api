@@ -3,11 +3,11 @@ import "../app/styles/search.scss"
 
 const Search = ({search,setSearch,onSubmit}:{
   search:string;
-setSearch:(type:any)=>void;
+setSearch:(type:string)=>void;
 onSubmit:(e:any)=>void
 }) => {
   const onInputChange =((e:any)=>{
-    const {name,value}= e.target
+   
 setSearch(e.target.value)
   })
   return (

@@ -23,9 +23,9 @@ const Modal = ({
     if (isNextLoading) {
       const timer = setTimeout(() => {
         setIsNextLoading(false);
-      }, 1000); // 1 second timer
+      }, 1000);
 
-      return () => clearTimeout(timer); // Cleanup on unmount
+      return () => clearTimeout(timer);
     }
   };
 
