@@ -7,17 +7,26 @@ import './styles/global.css';
 
 import axios from "axios";
 import Loading from "@/components/Loading";
-
+interface UnsplashImage {
+  id: string;
+  urls: {
+    raw: string;
+    small: string;
+  };
+  alt_description: string;
+  width: number;
+  height: number;
+}
 export default function Home() {
   const [search,setSearch]=useState('')
   const [isOpen,setIsOpen]=useState(false)
   const [isLoading,setIsLoading] = useState(false)
   const [isNextLoading,setIsNextLoading] = useState(false)
   const [isSelected,SetIsSelected]=useState(0)
-  const [results,setResults]=useState([])
+  const [results,setResults]=useState<UnsplashImage[]>([])
 
 
-  const onSubmit = async (e:any)=>{
+  const onSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
 e.preventDefault();
 
  const response = await axios.get(`https://api.unsplash.com/search/photos`,
@@ -49,7 +58,7 @@ e.preventDefault();
 }
 
   useEffect(()=>{
-console.log("loading",isLoading)
+
 load()
   },[isLoading])
   return (

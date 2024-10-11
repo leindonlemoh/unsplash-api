@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react';
 import '@/app/styles/gallery.scss';
-
+interface UnsplashImage {
+  id: string;
+  urls: {
+    raw: string;
+    small: string;
+  };
+  alt_description: string;
+  width: number;
+  height: number;
+}
 const Gallery = ({
   results,
   SetIsOpen,
@@ -8,7 +17,7 @@ const Gallery = ({
   isLoading,
 
 }: {
-  results: any;
+  results: UnsplashImage[];
   SetIsOpen: (res: boolean) => void;
   SetIsSelected: (res: number) => void;
   isLoading: boolean;
@@ -54,7 +63,7 @@ const Gallery = ({
       {!isLoading ? (
        
         <>
-          {results.map((item: any, index: number) => (
+          {results.map((item: UnsplashImage, index: number) => (
             <img
               key={item.id}
               src={item.urls.small}

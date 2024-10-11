@@ -4,9 +4,9 @@ import "../app/styles/search.scss"
 const Search = ({search,setSearch,onSubmit}:{
   search:string;
 setSearch:(type:string)=>void;
-onSubmit:(e:any)=>void
+onSubmit:(e:React.FormEvent<HTMLFormElement>)=>void
 }) => {
-  const onInputChange =((e:any)=>{
+  const onInputChange =((e:React.ChangeEvent<HTMLInputElement>)=>{
    
 setSearch(e.target.value)
   })

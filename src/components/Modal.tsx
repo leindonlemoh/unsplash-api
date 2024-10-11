@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import '@/app/styles/modal.scss';
-
+interface UnsplashImage {
+  id: string;
+  urls: {
+    raw: string;
+    small: string;
+  };
+  alt_description: string;
+  width: number;
+  height: number;
+}
 const Modal = ({
   results,
   SetIsOpen,
@@ -9,7 +18,7 @@ const Modal = ({
   setIsNextLoading,
   isNextLoading
 }: {
-  results: any;
+  results: UnsplashImage[];
   isSelected: number;
   SetIsSelected: (sel: number) => void;
   SetIsOpen: (result: boolean) => void;
@@ -50,7 +59,7 @@ const Modal = ({
         </button>
       </div>
       <div className='modal-content'>
-        {results.map((items: any, index: number) => {
+        {results.map((items: UnsplashImage, index: number) => {
           if (isSelected === index) {
             const imgStyle: React.CSSProperties = {
               width: 'auto',
